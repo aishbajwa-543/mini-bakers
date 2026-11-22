@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MiniBakers | Cakes, Brownies & Cupcakes</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    background: #f7eee5;
+    color: #713e3b;
+}
+
+/* ================= NAVBAR ================= */
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(247,238,229,.96);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    box-shadow: 0 3px 15px rgba(80,40,40,.1);
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 900;
+    color: #81423e;
+}
+
+.logo span {
+    color: #d755a1;
+}
+
+.nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #713e3b;
+    font-weight: 800;
+}
+
+.nav-links a:hover {
+    color: #d755a1;
+}
+
+.menu-button {
+    display: none;
+    border: none;
+    background: none;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+    min-height: 100vh;
+    padding: 150px 8% 80px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(235,132,187,.55),
+            transparent 35%
+        ),
+        #f7eee5;
+}
+
+.hero-content {
+    max-width: 650px;
+    position: relative;
+    z-index: 2;
+}
+
+.badge {
+    display: inline-block;
+    padding: 8px 18px;
+    border-radius: 30px;
+    background: #f2c9df;
+    color: #8b467d;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: clamp(45px, 7vw, 80px);
+    line-height: 1;
+    color: #713e3b;
+}
+
+.hero h1 span {
+    color: #c84e97;
+}
+
+.hero p {
+    max-width: 550px;
+    margin: 25px 0;
+    font-size: 18px;
+    color: #795b54;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 13px 27px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: .3s;
+}
+
+.btn-primary {
+    background: #8a477e;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #713e3b;
+    transform: translateY(-3px);
+}
+
+.btn-outline {
+    border: 2px solid #8a477e;
+    color: #8a477e;
+}
+
+.btn-outline:hover {
+    background: #8a477e;
+    color: white;
+}
+
+/* Hero cake image */
+
+.hero-image {
+    position: absolute;
+    right: 5%;
+    width: 42%;
+    max-width: 520px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 25px 60px rgba(90,40,50,.2);
+}
+
+.hero-image img {
+    width: 100%;
+    display: block;
+}
+
+/* ================= MENU ================= */
+
+.menu-section {
+    padding: 100px 7%;
+    position: relative;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 55px;
+}
+
+.section-title span {
+    color: #c84e97;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.section-title h2 {
+    font-size: 45px;
+    margin: 8px 0;
+}
+
+.section-title p {
+    color: #795b54;
+}
+
+/* ================= PRODUCT CARDS ================= */
+
+.product-grid {
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
+.product-card {
+    background: #fffaf6;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 12px 35px rgba(90,40,50,.12);
+    transition: .35s;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 45px rgba(90,40,50,.2);
+}
+
+.product-image {
+    height: 260px;
+    overflow: hidden;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: .5s;
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.08);
+}
+
+.product-info {
+    padding: 22px;
+    text-align: center;
+}
+
+.product-info h3 {
+    color: #81423e;
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.product-info p {
+    color: #80665d;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.price {
+    color: #c34b92;
+    font-size: 22px;
+    font-weight: 900;
+}
+
+.order-small {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 25px;
+    background: #8a477e;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.order-small:hover {
+    background: #713e3b;
+}
+
+/* ================= MENU PRICE LIST ================= */
+
+.price-list {
+    max-width: 850px;
+    margin: 70px auto 0;
+    padding: 40px;
+    background: rgba(255,255,255,.5);
+    border-radius: 25px;
+}
+
+.price-list h3 {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 25px;
+    color: #81423e;
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 13px 5px;
+    border-bottom: 1px dashed #c982a9;
+    font-weight: 900;
+    color: #864679;
+}
+
+/* ================= GALLERY ================= */
+
+.gallery {
+    background: #fffaf6;
+    padding: 100px 7%;
+}
+
+.gallery-grid {
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.gallery-item {
+    height: 280px;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 8px 25px rgba(80,40,40,.12);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: .5s;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+.gallery-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 18px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    background: linear-gradient(
+        transparent,
+        rgba(60,25,30,.85)
+    );
+}
+
+/* ================= ABOUT ================= */
+
+.about {
+    max-width: 1100px;
+    margin: auto;
+    padding: 100px 7%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 55px;
+    align-items: center;
+}
+
+.about-image {
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(80,40,40,.15);
+}
+
+.about-image img {
+    width: 100%;
+    display: block;
+}
+
+.about-text h2 {
+    font-size: 42px;
+    margin-bottom: 20px;
+}
+
+.about-text h2 span {
+    color: #c84e97;
+}
+
+.about-text p {
+    color: #795b54;
+    margin-bottom: 15px;
+    line-height: 1.8;
+}
+
+/* ================= CONTACT ================= */
+
+.contact {
+    padding: 90px 7%;
+    background: #f2dce8;
+}
+
+.contact-container {
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+}
+
+.phone {
+    font-size: 32px;
+    font-weight: 900;
+    color: #81423e;
+    margin: 20px;
+}
+
+.social {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px;
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+    background: #713e3b;
+    color: white;
+    text-align: center;
+    padding: 30px;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width: 900px) {
+
+    .hero-image {
+        position: relative;
+        right: auto;
+        width: 70%;
+        margin-top: 40px;
+    }
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-content {
+        margin: auto;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .about {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(max-width: 600px) {
+
+    .menu-button {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 65px;
+        left: 0;
+        width: 100%;
+        background: #f7eee5;
+        flex-direction: column;
+        text-align: center;
+        padding: 25px;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .hero {
+        padding: 120px 6% 60px;
+    }
+
+    .hero-image {
+        width: 90%;
+    }
+
+    .section-title h2 {
+        font-size: 34px;
+    }
+
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-item {
+        height: 300px;
+    }
+
+    .price-list {
+        padding: 25px 18px;
+    }
+
+    .about {
+        padding: 70px 6%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav>
+
+    <div class="logo">
+        Mini<span>Bakers</span>
+    </div>
+
+    <button class="menu-button" id="menuButton">
+        ☰
+    </button>
+
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+
+</nav>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            🧁 Freshly Baked With Love
+        </div>
+
+        <h1>
+            Sweet Moments,
+            <span>Beautifully Baked.</span>
+        </h1>
+
+        <p>
+            Welcome to MiniBakers — delicious cakes, brownies,
+            cupcakes and homemade treats made specially for you.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="#menu" class="btn btn-primary">
+                View Menu
+            </a>
+
+            <a href="#gallery" class="btn btn-outline">
+                See Our Cakes
+            </a>
+        </div>
+
+    </div>
+
+    <div class="hero-image">
+
+        <img
+        src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=85"
+        alt="Beautiful chocolate cake">
+
+    </div>
+
+</section>
+
+
+<!-- ================= MENU PRODUCTS ================= -->
+
+<section class="menu-section" id="menu">
+
+    <div class="section-title">
+
+        <span>MINIBAKERS MENU</span>
+
+        <h2>Our Delicious Treats</h2>
+
+        <p>
+            Freshly prepared cakes, brownies and cupcakes.
+        </p>
+
+    </div>
+
+
+    <div class="product-grid">
+
+        <!-- CAKE -->
+
+        <div class="product-card">
+
+            <div class="product-image">
+
+                <img
+                src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=85"
+                alt="Chocolate Cake">
+
+            </div>
+
+            <div class="product-info">
+
+                <h3>Chocolate Cake</h3>
+
+                <p>
+                    Soft, creamy and delicious celebration cake.
+                </p>
+
+                <div class="price">
+                    Rs. 1500
+                </div>
+
+                <button
+                class="order-small"
+                onclick="orderProduct('Chocolate Cake')">
+                    Order Now
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- BROWNIES -->
+
+        <div class="product-card">
+
+            <div class="product-image">
+
+                <img
+                src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=85"
+                alt="Chocolate Brownies">
+
+            </div>
+
+            <div class="product-info">
+
+                <h3>Fudge Brownies</h3>
+
+                <p>
+                    Rich, fudgy and loaded with chocolate flavor.
+                </p>
+
+                <div class="price">
+                    Rs. 300
+                </div>
+
+                <button
+                class="order-small"
+                onclick="orderProduct('Fudge Brownies')">
+                    Order Now
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- CUPCAKES -->
+
+        <div class="product-card">
+
+            <div class="product-image">
+
+                <img
+                src="https://images.unsplash.com/photo-1587668178277-295251f900ce?auto=format&fit=crop&w=800&q=85"
+                alt="Beautiful Cupcakes">
+
+            </div>
+
+            <div class="product-info">
+
+                <h3>Cupcakes</h3>
+
+                <p>
+                    Soft cupcakes topped with creamy frosting.
+                </p>
+
+                <div class="price">
+                    Rs. 800 / 6
+                </div>
+
+                <button
+                class="order-small"
+                onclick="orderProduct('6 Cupcakes')">
+                    Order Now
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PRICE LIST -->
+
+    <div class="price-list">
+
+        <h3>MiniBakers Price List</h3>
+
+        <div class="price-row">
+            <span>Bentoo</span>
+            <span>Rs. 850</span>
+        </div>
+
+        <div class="price-row">
+            <span>Bento With 2 Cupcakes</span>
+            <span>Rs. 1150</span>
+        </div>
+
+        <div class="price-row">
+            <span>Bento With 4 Cupcakes</span>
+            <span>Rs. 1350</span>
+        </div>
+
+        <div class="price-row">
+            <span>Bento With 6 Cupcakes</span>
+            <span>Rs. 1550</span>
+        </div>
+
+        <div class="price-row">
+            <span>1 Pound Cake</span>
+            <span>Rs. 1500</span>
+        </div>
+
+        <div class="price-row">
+            <span>2 Pound Cake</span>
+            <span>Rs. 3000</span>
+        </div>
+
+        <div class="price-row">
+            <span>6 Cupcakes</span>
+            <span>Rs. 800</span>
+        </div>
+
+        <div class="price-row">
+            <span>Tea Cake</span>
+            <span>Rs. 750</span>
+        </div>
+
+        <div class="price-row">
+            <span>Marble Cake</span>
+            <span>Rs. 850</span>
+        </div>
+
+        <div class="price-row">
+            <span>Cupcake Platter</span>
+            <span>Rs. 1350</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= GALLERY ================= -->
+
+<section class="gallery" id="gallery">
+
+    <div class="section-title">
+
+        <span>OUR GALLERY</span>
+
+        <h2>Freshly Baked Goodness</h2>
+
+        <p>
+            Take a look at some of our delicious bakery creations.
+        </p>
+
+    </div>
+
+
+    <div class="gallery-grid">
+
+        <div class="gallery-item">
+
+            <img
+            src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=85"
+            alt="Chocolate Cake">
+
+            <div class="gallery-label">
+                🎂 Chocolate Cake
+            </div>
+
+        </div>
+
+
+        <div class="gallery-item">
+
+            <img
+            src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=85"
+            alt="Brownies">
+
+            <div class="gallery-label">
+                🍫 Fudge Brownies
+            </div>
+
+        </div>
+
+
+        <div class="gallery-item">
+
+            <img
+            src="https://images.unsplash.com/photo-1587668178277-295251f900ce?auto=format&fit=crop&w=800&q=85"
+            alt="Cupcakes">
+
+            <div class="gallery-label">
+                🧁 Fresh Cupcakes
+            </div>
+
+        </div>
+
+
+        <div class="gallery-item">
+
+            <img
+            src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=800&q=85"
+            alt="Sweet Bakery">
+
+            <div class="gallery-label">
+                🍰 Sweet Treats
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ABOUT ================= -->
+
+<section class="about" id="about">
+
+    <div class="about-image">
+
+        <img
+        src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=85"
+        alt="MiniBakers Cake">
+
+    </div>
+
+
+    <div class="about-text">
+
+        <h2>
+            Made With
+            <span>Love & Care</span>
+        </h2>
+
+        <p>
+            At MiniBakers, every cake and sweet treat is prepared
+            with care and attention to detail.
+        </p>
+
+        <p>
+            Whether it is a birthday, celebration or simply a craving
+            for something sweet, we have something special for you.
+        </p>
+
+        <a href="#contact" class="btn btn-primary">
+            Order Your Treat
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CONTACT ================= -->
+
+<section class="contact" id="contact">
+
+    <div class="contact-container">
+
+        <h2>
+            Let's Bake Something
+            <span>Special!</span>
+        </h2>
+
+        <div class="phone">
+            📞 03125519138
+        </div>
+
+        <div class="social">
+            📷 Instagram: @MINIIBAKERSS
+        </div>
+
+        <div class="social">
+            🎵 TikTok: @MINIIBAKERSS
+        </div>
+
+        <br>
+
+        <button
+        class="btn btn-primary"
+        onclick="orderNow()">
+            Order on WhatsApp
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <h2>MiniBakers 🧁</h2>
+
+    <p>
+        Freshly baked happiness, one bite at a time.
+    </p>
+
+    <p>
+        © 2026 MiniBakers. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+<script>
+
+/* ================= MOBILE MENU ================= */
+
+const menuButton =
+document.getElementById("menuButton");
+
+const navLinks =
+document.getElementById("navLinks");
+
+menuButton.addEventListener("click", function() {
+
+    navLinks.classList.toggle("active");
+
+});
+
+
+/* ================= PRODUCT ORDER ================= */
+
+function orderProduct(product) {
+
+    const phone = "923125519138";
+
+    const message =
+        "Hello MiniBakers! I would like to order: "
+        + product
+        + ". Please share availability and details.";
+
+    const whatsapp =
+        "https://wa.me/"
+        + phone
+        + "?text="
+        + encodeURIComponent(message);
+
+    window.open(whatsapp, "_blank");
+}
+
+
+/* ================= GENERAL ORDER ================= */
+
+function orderNow() {
+
+    const phone = "923125519138";
+
+    const message =
+        "Hello MiniBakers! I would like to place an order. Please share your menu and availability.";
+
+    const whatsapp =
+        "https://wa.me/"
+        + phone
+        + "?text="
+        + encodeURIComponent(message);
+
+    window.open(whatsapp, "_blank");
+}
+
+
+/* Close mobile menu */
+
+document.querySelectorAll(".nav-links a")
+.forEach(function(link) {
+
+    link.addEventListener("click", function() {
+
+        navLinks.classList.remove("active");
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
